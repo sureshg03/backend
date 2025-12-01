@@ -1,0 +1,50 @@
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
+
+router = DefaultRouter()
+router.register(r'newsletters', views.NewsletterViewSet, basename='newsletter')
+
+urlpatterns = [
+    path('check-admin-exists/', views.check_admin_exists, name='check_admin_exists'),
+    path('create-admin/', views.create_admin, name='create_admin'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('send_otp/', views.send_otp, name='send_otp'),
+    path('verify_otp/', views.verify_otp, name='verify_otp'),
+    path('reset_password/', views.reset_password, name='reset_password'),
+    path('current-user/', views.get_current_user, name='current_user'),
+    path('debug-current-user/', views.debug_current_user, name='debug_current_user'),
+    path('dashboard-stats/', views.get_dashboard_stats, name='dashboard_stats'),
+    path('department-student-counts/', views.get_department_student_counts, name='department_student_counts'),
+    path('active-student-counts/', views.get_active_student_counts, name='active_student_counts'),
+    path('alumni-status-counts/', views.get_alumni_status_counts, name='alumni_status_counts'),
+    path('job-counts/', views.get_job_counts, name='job_counts'),
+    path('add-department/', views.add_department, name='add_department'),
+    path('update-department/<str:department_id>/', views.update_department, name='update_department'),
+    path('delete-department/<str:department_id>/', views.delete_department, name='delete_department'),
+    path('delete-all-departments/', views.delete_all_departments, name='delete_all_departments'),
+    path('get-departments/', views.get_departments, name='get_departments'),
+    path('departments/', views.DepartmentListView.as_view(), name='department_list'),
+    path('degrees/<str:department_id>/', views.DegreeListView.as_view(), name='degree_list'),
+    path('students/<int:degree_id>/', views.StudentListView.as_view(), name='student_list'),
+    path('polls/', views.poll_list_create, name='poll_list_create'),
+    path('polls/<int:poll_id>/', views.update_poll, name='update_poll'),
+    path('polls/<int:poll_id>/vote/', views.vote_poll, name='vote_poll'),
+    path('polls/<int:poll_id>/move-to-past/', views.move_to_past, name='move_to_past'),
+    path('polls/<int:poll_id>/delete/', views.delete_poll, name='delete_poll'),
+    path('polls/delete-all/', views.delete_all_polls, name='delete_all_polls'),
+    path('user_votes/', views.get_user_votes, name='get_user_votes'),
+    path('success-stories/', views.success_story_list_create, name='success_story_list_create'),
+    path('success-stories/<int:story_id>/', views.update_success_story, name='update_success_story'),
+    path('success-stories/<int:story_id>/delete/', views.delete_success_story, name='delete_success_story'),
+    path('success-stories/delete-all/', views.delete_all_success_stories, name='delete_all_success_stories'),
+    path('get-csrf-token/', views.get_csrf_token, name='get_csrf_token'),
+    path('newsletters/delete-all/', views.delete_all_newsletters, name='delete_all_newsletters'),
+    path('', include(router.urls)),
+    path('feedbacks/', views.admin_feedback_list, name='admin_feedback_list'),
+    path('feedbacks/<int:pk>/', views.admin_feedback_detail, name='admin_feedback_detail'),
+    path('feedbacks/<int:pk>/delete/', views.admin_feedback_delete, name='admin_feedback_delete'),
+    path('feedbacks/bulk-read/', views.admin_bulk_mark_read, name='admin_bulk_mark_read'),
+    path('feedbacks/bulk-delete/', views.admin_bulk_delete, name='admin_bulk_delete'),
+]
