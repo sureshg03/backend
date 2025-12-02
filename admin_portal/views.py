@@ -974,7 +974,7 @@ class NewsletterViewSet(viewsets.ModelViewSet):
             logger.error(f"Failed to delete newsletter: {str(e)}")
             return Response({"message": f"Failed to delete newsletter: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(detail=True, methods=['delete'], url_path='images/(?P<image_id>\d+)')
+    @action(detail=True, methods=['delete'], url_path='images/(?P<image_id>\\\d+)')
     def delete_image(self, request, pk=None, image_id=None):
         try:
             current_user = CurrentlyLoggedInUser.objects.first()
