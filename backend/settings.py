@@ -148,18 +148,10 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='periyaruniversity08@gmail.c
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='wafl azrs ldjv eeyt')  # Replace with your email password
 
 
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME', default='admin_db'),
-        'USER': config('DB_USER', default='root'),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='3306'),
-        'OPTIONS': {
-            'charset': 'utf8',
-        },
-    }
+    'default': dj_database_url.config(default=config('DATABASE_URL', default=''))
 }
 
 
