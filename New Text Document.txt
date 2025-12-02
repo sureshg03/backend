@@ -1,0 +1,7 @@
+SECRET_KEY=django-insecure-5=5hs34fl9)kbzs)ua*j96)sggpqhi$n-djdtxg3qy+@xwo$aa 
+DEBUG=True 
+DB_USER=root 
+DB_PASSWORD=''
+CLOUDINARY_CLOUD_NAME=Alumni NewsLetter
+CLOUDINARY_API_KEY=759262111776751
+CLOUDINARY_API_SECRET=gVkKIiJ4HzRxHGIPaLP9xXU7B_I
