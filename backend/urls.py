@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from django.http import HttpResponse
 
 urlpatterns = [
+    path('', lambda request: HttpResponse("Alumni Portal API is running"), name='home'),
     path('admin/', admin.site.urls),
     path('api/', include('admin_portal.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
