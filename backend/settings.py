@@ -114,10 +114,15 @@ REST_FRAMEWORK = {
 
 CORS_ALLOW_CREDENTIALS = True  # Allow cookies and auth headers
 
+# Session and CSRF cookie settings for cross-origin auth
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
 
-SESSION_COOKIE_SAMESITE = 'Lax'
-CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = False
+
 CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://alumniadmin73.netlify.app,https://web-production-6135b.up.railway.app').split(',')
 ROOT_URLCONF = 'backend.urls'
 APPEND_SLASH = False
