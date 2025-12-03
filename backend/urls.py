@@ -21,7 +21,7 @@ from django.conf import settings
 from django.http import HttpResponse
 
 urlpatterns = [
-    path('', lambda request: HttpResponse("Alumni Portal API is running"), name='home'),
+    path('', lambda request: HttpResponse("OK — Django is running"), name='home'),
     path('admin/', admin.site.urls),
     path('api/', include('admin_portal.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
