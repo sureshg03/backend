@@ -99,7 +99,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'https://alumniadmin73.netlify.app').split(',')
 
 
 AUTHENTICATION_BACKENDS = [
@@ -118,7 +118,7 @@ CORS_ALLOW_CREDENTIALS = True  # Allow cookies and auth headers
 SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_HTTPONLY = False
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://localhost:5173').split(',')
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://alumniadmin73.netlify.app,https://web-production-6135b.up.railway.app').split(',')
 ROOT_URLCONF = 'backend.urls'
 APPEND_SLASH = False
 
