@@ -30,12 +30,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-5=5hs34fl9)kbzs)ua*j96)sggpqhi$n-djdtxg3qy+@xwo$aa')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 CLOUDINARY_STORAGE = {
@@ -90,6 +90,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -98,7 +99,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:5173').split(',')
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '').split(',')
 
 
 AUTHENTICATION_BACKENDS = [
@@ -151,7 +152,9 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='wafl azrs ldjv eeyt
 import dj_database_url
 
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL', default=''))
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')  # Railway's provided URL
+    )
 }
 
 
@@ -191,6 +194,7 @@ APPEND_SLASH = False
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
